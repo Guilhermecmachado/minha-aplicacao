@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]  # Use 'main' se sua branch padrão for 'main'
   pull_request:
-    branches: [ main ]
+    branches: [ master ]  # Use 'main' se sua branch padrão for 'main'
 
 jobs:
   build:
@@ -22,11 +22,11 @@ jobs:
 
     - name: Executar SonarCloud
       env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  # Certifique-se de que o token está adicionado nos Secrets
       run: |
         npm install -g sonar-scanner
         sonar-scanner \
-          -Dsonar.projectKey=minha-aplicacao \  # Substitua pelo seu projectKey
-          -Dsonar.organization=seu-usuario \      # Substitua pela sua organization
+          -Dsonar.projectKey=YOUR_PROJECT_KEY \  # Substitua pelo seu projectKey
+          -Dsonar.organization=YOUR_ORGANIZATION \  # Substitua pela sua organization
           -Dsonar.host.url=https://sonarcloud.io \
           -Dsonar.login=$SONAR_TOKEN
