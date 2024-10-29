@@ -12,7 +12,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@latest  # Atualizado para a versão mais recente
+      uses: actions/checkout@v3  # Usando a versão v3
 
     - name: Instalar dependências
       run: npm install
