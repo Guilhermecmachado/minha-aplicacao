@@ -17,7 +17,8 @@ jobs:
       - name: Set up Java
         uses: actions/setup-java@v3
         with:
-          java-version: '17'  # Especifica o Java 17 para evitar incompatibilidades
+          java-version: '17'
+          distribution: 'temurin'  # Define a distribuição do Java
 
       - name: Install dependencies
         run: npm install
