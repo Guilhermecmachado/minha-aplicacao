@@ -12,7 +12,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3  # Usando a versão v3
+      uses: actions/checkout@v3
 
     - name: Instalar dependências
       run: npm install
@@ -21,17 +21,17 @@ jobs:
       run: npm test
 
     - name: Instalar sonar-scanner
-      run: npm install -g sonar-scanner  # Tente instalar globalmente
+      run: npm install -g sonar-scanner
 
     - name: Verificar instalação do sonar-scanner
-      run: sonar-scanner --version  # Verifique se o sonar-scanner está instalado
+      run: sonar-scanner --version
 
     - name: Executar SonarCloud
       env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  # Certifique-se de que o token está adicionado nos Secrets
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: |
         sonar-scanner \
-          -Dsonar.projectKey=YOUR_PROJECT_KEY \  # Substitua pelo seu projectKey
-          -Dsonar.organization=YOUR_ORGANIZATION \  # Substitua pela sua organization
+          -Dsonar.projectKey=YOUR_PROJECT_KEY \
+          -Dsonar.organization=YOUR_ORGANIZATION \
           -Dsonar.host.url=https://sonarcloud.io \
           -Dsonar.login=$SONAR_TOKEN
