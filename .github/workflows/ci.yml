@@ -2,36 +2,36 @@ name: CI
 
 on:
   push:
-    branches: [ master ]  # Use 'main' se sua branch padrão for 'main'
+    branches: [master]
   pull_request:
-    branches: [ master ]  # Use 'main' se sua branch padrão for 'main'
+    branches: [master]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Instalar dependências
-      run: npm install
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'  # Especifica o Java 17 para evitar incompatibilidades
 
-    - name: Executar testes
-      run: npm test
+      - name: Install dependencies
+        run: npm install
 
-    - name: Instalar sonar-scanner
-      run: npm install -g sonar-scanner
+      - name: Run tests
+        run: npm test
 
-    - name: Verificar instalação do sonar-scanner
-      run: sonar-scanner --version
-
-    - name: Executar SonarCloud
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: |
-        sonar-scanner \
-          -Dsonar.projectKey=YOUR_PROJECT_KEY \
-          -Dsonar.organization=YOUR_ORGANIZATION \
-          -Dsonar.host.url=https://sonarcloud.io \
-          -Dsonar.login=$SONAR_TOKEN
+      - name: Run SonarCloud
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          npm install -g sonar-scanner
+          sonar-scanner \
+            -Dsonar.projectKey=minha-aplicacao \
+            -Dsonar.organization=seu-usuario \
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.login=$SONAR_TOKEN
